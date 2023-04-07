@@ -12,6 +12,8 @@ const char* type_names[] = {"BURGER", "FRIES"};
 #define pii pair<int, int>
 
 int k;
+sem_t orderIn;
+sem_t orderOut;
 
 // Do not change
 void process_order() {
@@ -26,6 +28,14 @@ void place_order(int type) {
      *     otherwise place this order (print order)
      *  Use type_names[type] to print the order type
      */
+    if (k == MAX_THREADS) {
+        // orderOut waits
+        cout << "Waiting: " << type_names[type] << endl;
+    } else {
+        // orderIn waits
+        cout << "Order: " << type_names[type] << endl;
+    }
+
 
     process_order();        // Do not remove, simulates preparation
 
